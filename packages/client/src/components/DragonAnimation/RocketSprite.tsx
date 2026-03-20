@@ -1,7 +1,7 @@
 /**
- * SVG Rocket sprite — Disney-inspired "Toy" style.
- * Features: ultra-rounded "pot-bellied" shape, vibrant glossy finish, large expressive window,
- * soft inner glows for 3D depth, and magical star-sparkle engine effects.
+ * SVG Rocket sprite — Disney-inspired "High-Fidelity" style.
+ * Combines cartoon proportions with realistic rendering: rim lighting, 
+ * surface panel textures, complex specular highlights, and refractive glass.
  */
 export function RocketSprite({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -13,137 +13,158 @@ export function RocketSprite({ className, style }: { className?: string; style?:
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* ── Main Body: Glossy White Porcelain ── */}
-        <radialGradient id="ds-body" cx="50%" cy="40%" r="70%">
+        {/* ── Body: High-Gloss Ceramic/Metallic Blend ── */}
+        <radialGradient id="ds-body-base" cx="45%" cy="35%" r="80%">
           <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="60%" stopColor="#f8fafc" />
-          <stop offset="100%" stopColor="#e2e8f0" />
+          <stop offset="40%" stopColor="#f1f5f9" />
+          <stop offset="85%" stopColor="#cbd5e1" />
+          <stop offset="100%" stopColor="#94a3b8" />
         </radialGradient>
         
-        {/* ── Inner Glow for Body (Soft 3D edge) ── */}
-        <linearGradient id="ds-body-glow" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="white" stopOpacity="0.4" />
-          <stop offset="15%" stopColor="white" stopOpacity="0" />
-          <stop offset="85%" stopColor="black" stopOpacity="0" />
-          <stop offset="100%" stopColor="black" stopOpacity="0.05" />
+        {/* ── Rim Light (The "Disney" 3D separator) ── */}
+        <linearGradient id="ds-rim-light" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="white" stopOpacity="0.8" />
+          <stop offset="3%" stopColor="white" stopOpacity="0" />
+          <stop offset="97%" stopColor="white" stopOpacity="0" />
+          <stop offset="100%" stopColor="white" stopOpacity="0.6" />
         </linearGradient>
 
-        {/* ── Vibrant Red Accents (Nose & Fins) ── */}
-        <radialGradient id="ds-red-gloss" cx="40%" cy="30%" r="80%">
-          <stop offset="0%" stopColor="#ff4d4d" />
-          <stop offset="70%" stopColor="#e11d48" />
-          <stop offset="100%" stopColor="#9f1239" />
+        {/* ── Specular Shine (Sharp reflection) ── */}
+        <linearGradient id="ds-specular" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="35%" stopColor="white" stopOpacity="0" />
+          <stop offset="38%" stopColor="white" stopOpacity="0.4" />
+          <stop offset="42%" stopColor="white" stopOpacity="0" />
+        </linearGradient>
+
+        {/* ── Red Accent: Deep Polish ── */}
+        <radialGradient id="ds-red-rich" cx="35%" cy="25%" r="90%">
+          <stop offset="0%" stopColor="#ff5f5f" />
+          <stop offset="45%" stopColor="#e11d48" />
+          <stop offset="85%" stopColor="#881337" />
+          <stop offset="100%" stopColor="#4c0519" />
         </radialGradient>
 
-        {/* ── Large Expressive Window: Multi-layer Glass ── */}
-        <radialGradient id="ds-window-depth" cx="40%" cy="30%" r="70%">
-          <stop offset="0%" stopColor="#bae6fd" />
-          <stop offset="40%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#0369a1" />
+        {/* ── Window: Refractive Depth ── */}
+        <radialGradient id="ds-win-glass" cx="35%" cy="30%" r="80%">
+          <stop offset="0%" stopColor="#e0f2fe" />
+          <stop offset="25%" stopColor="#7dd3fc" />
+          <stop offset="60%" stopColor="#0284c7" />
+          <stop offset="90%" stopColor="#0c4a6e" />
+          <stop offset="100%" stopColor="#082f49" />
         </radialGradient>
-        
-        {/* ── Magical Flame: Soft Blue/White Core ── */}
-        <radialGradient id="ds-flame-core" cx="50%" cy="0%" r="100%">
+
+        {/* ── Engine Glow (Blue-hot core) ── */}
+        <radialGradient id="ds-magical-core" cx="50%" cy="20%" r="80%">
           <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="30%" stopColor="#fbbf24" />
-          <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+          <stop offset="20%" stopColor="#7dd3fc" />
+          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
         </radialGradient>
 
-        {/* ── Ambient Occlusion (Bottom Shadow) ── */}
-        <linearGradient id="ds-shadow" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="70%" stopColor="white" stopOpacity="0" />
-          <stop offset="100%" stopColor="#cbd5e1" stopOpacity="0.5" />
-        </linearGradient>
-
-        <filter id="ds-soft-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="1.5" result="blur" />
+        <filter id="ds-bloom" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
+
+        {/* ── Subtle Panel Texture ── */}
+        <pattern id="ds-panels" x="0" y="0" width="100" height="40" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="39.5" x2="100" y2="39.5" stroke="#94a3b8" strokeWidth="0.5" opacity="0.3" />
+        </pattern>
       </defs>
 
-      {/* ════════════ ENGINE GLOW ════════════ */}
-      <circle cx="50" cy="155" r="22" fill="url(#ds-flame-core)" opacity="0.6" filter="url(#ds-soft-glow)">
-        <animate attributeName="r" values="20;25;20" dur="0.8s" repeatCount="indefinite" />
+      {/* ════════════ ENGINE BLOOM ════════════ */}
+      <circle cx="50" cy="158" r="28" fill="url(#ds-magical-core)" opacity="0.5" filter="url(#ds-bloom)">
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="1s" repeatCount="indefinite" />
       </circle>
 
-      {/* ════════════ MAGICAL FLAME ════════════ */}
-      {/* Outer Glow */}
-      <path d="M35 145 Q50 175 65 145" fill="none" stroke="#f59e0b" strokeWidth="8" strokeOpacity="0.3" strokeLinecap="round">
-        <animate attributeName="d" values="M35 145 Q50 175 65 145; M30 145 Q50 185 70 145; M35 145 Q50 175 65 145" dur="0.4s" repeatCount="indefinite" />
-      </path>
-      {/* Core Stream */}
-      <path d="M42 145 Q50 165 58 145" fill="none" stroke="white" strokeWidth="6" strokeLinecap="round">
-        <animate attributeName="d" values="M42 145 Q50 165 58 145; M40 145 Q50 175 60 145; M42 145 Q50 165 58 145" dur="0.3s" repeatCount="indefinite" />
-      </path>
+      {/* ════════════ MAGICAL ENGINE STREAM ════════════ */}
+      <g filter="url(#ds-bloom)">
+        {/* Outer Plasma */}
+        <path d="M35 145 Q50 185 65 145" fill="none" stroke="#38bdf8" strokeWidth="12" strokeOpacity="0.2" strokeLinecap="round">
+          <animate attributeName="d" values="M35 145 Q50 185 65 145; M30 145 Q50 195 70 145; M35 145 Q50 185 65 145" dur="0.5s" repeatCount="indefinite" />
+        </path>
+        {/* Inner Core */}
+        <path d="M42 145 Q50 170 58 145" fill="none" stroke="white" strokeWidth="8" strokeLinecap="round">
+          <animate attributeName="d" values="M42 145 Q50 170 58 145; M40 145 Q50 185 60 145; M42 145 Q50 170 58 145" dur="0.25s" repeatCount="indefinite" />
+        </path>
+      </g>
 
-      {/* ════════════ FINS — Thick Rounded "Toys" ════════════ */}
+      {/* ════════════ FINS — Rounded but Solid ════════════ */}
       {/* Left Fin */}
-      <path d="M30 110 Q10 115 15 145 Q30 140 32 120 Z" fill="url(#ds-red-gloss)" stroke="#9f1239" strokeWidth="0.5" />
+      <path d="M30 110 Q8 115 15 148 Q30 142 32 115 Z" fill="url(#ds-red-rich)" stroke="#4c0519" strokeWidth="0.5" />
+      <path d="M18 118 Q12 118 16 135" fill="none" stroke="white" strokeWidth="1.5" opacity="0.2" strokeLinecap="round" />
       {/* Right Fin */}
-      <path d="M70 110 Q90 115 85 145 Q70 140 68 120 Z" fill="url(#ds-red-gloss)" stroke="#9f1239" strokeWidth="0.5" />
-      {/* Center Fin (Depth) */}
-      <path d="M48 115 Q50 125 52 115 Q50 145 50 145 Z" fill="#9f1239" opacity="0.4" />
+      <path d="M70 110 Q92 115 85 148 Q70 142 68 115 Z" fill="url(#ds-red-rich)" stroke="#4c0519" strokeWidth="0.5" />
+      <path d="M82 118 Q88 118 84 135" fill="none" stroke="white" strokeWidth="1.5" opacity="0.2" strokeLinecap="round" />
 
-      {/* ════════════ MAIN BODY — Pot-bellied shape ════════════ */}
+      {/* ════════════ MAIN BODY — High-quality Porcelain ════════════ */}
+      {/* Base Shape */}
       <path 
         d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" 
-        fill="url(#ds-body)" 
-        stroke="#cbd5e1" 
-        strokeWidth="1"
+        fill="url(#ds-body-base)" 
       />
-      {/* Shadow overlay */}
+      {/* Subtle Panel Grooves */}
+      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-panels)" opacity="0.4" />
+      
+      {/* Light/Shadow Overlays */}
+      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-specular)" />
+      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-rim-light)" />
+
+      {/* ════════════ NOSE CONE — Polished Finish ════════════ */}
       <path 
-        d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" 
-        fill="url(#ds-shadow)" 
+        d="M30 60 Q30 15 50 5 Q70 15 70 60 Q50 72 30 60 Z" 
+        fill="url(#ds-red-rich)" 
+        stroke="#4c0519" 
+        strokeWidth="0.5"
       />
-      {/* Edge Gloss */}
+      {/* Rim light on nose */}
+      <path d="M32 58 Q32 18 50 8" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+      {/* Specular highlight */}
+      <ellipse cx="44" cy="24" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-15, 44, 24)" />
+
+      {/* ════════════ PREMIUM WINDOW ════════════ */}
+      {/* Metallic Bezel */}
+      <circle cx="50" cy="85" r="15" fill="#1e293b" />
+      <circle cx="50" cy="85" r="14.5" fill="#f1f5f9" />
+      <circle cx="50" cy="85" r="13.5" fill="#334155" />
+      {/* Glass with internal reflections */}
+      <circle cx="50" cy="85" r="12" fill="url(#ds-win-glass)" />
+      {/* Surface reflection */}
+      <path d="M42 82 Q45 76 52 76" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+      <circle cx="43" cy="80" r="1.5" fill="white" opacity="0.5" />
+      {/* Rim light inside glass */}
+      <circle cx="50" cy="85" r="11" fill="none" stroke="white" strokeWidth="0.5" opacity="0.1" />
+
+      {/* ════════════ MECHANICAL DETAILS ════════════ */}
+      {/* Rivets / Fasteners */}
+      <circle cx="35" cy="100" r="1" fill="#475569" opacity="0.4" />
+      <circle cx="65" cy="100" r="1" fill="#475569" opacity="0.4" />
+      <circle cx="35" cy="130" r="1" fill="#475569" opacity="0.4" />
+      <circle cx="65" cy="130" r="1" fill="#475569" opacity="0.4" />
+      
+      {/* Golden Logo Plaque */}
+      <g transform="translate(42, 115) scale(0.6)">
+        <circle cx="13" cy="13" r="14" fill="#f5a623" stroke="#92400e" strokeWidth="1" />
+        <path d="M13 5 L15 11 L21 11 L16 15 L18 21 L13 17 L8 21 L10 15 L5 11 L11 11 Z" fill="white" opacity="0.9" />
+      </g>
+
+      {/* ════════════ ENGINE NOZZLE — Heat-stained Metal ════════════ */}
       <path 
-        d="M32 60 Q32 18 50 8" 
+        d="M34 145 Q35 156 50 156 Q65 156 66 145" 
         fill="none" 
-        stroke="white" 
-        strokeWidth="2.5" 
+        stroke="#1e293b" 
+        strokeWidth="5" 
         strokeLinecap="round" 
-        opacity="0.6" 
       />
-
-      {/* ════════════ NOSE CONE — Rounded ════════════ */}
       <path 
-        d="M30 60 Q30 15 50 5 Q70 15 70 60 Q50 70 30 60 Z" 
-        fill="url(#ds-red-gloss)" 
-        stroke="#9f1239" 
-        strokeWidth="0.5"
-      />
-      {/* Nose Shine */}
-      <ellipse cx="45" cy="25" rx="5" ry="8" fill="white" opacity="0.3" transform="rotate(-20, 45, 25)" />
-
-      {/* ════════════ BIG CARTOON WINDOW ════════════ */}
-      {/* Outer Border */}
-      <circle cx="50" cy="85" r="14" fill="#64748b" />
-      <circle cx="50" cy="85" r="12" fill="white" />
-      {/* Glass */}
-      <circle cx="50" cy="85" r="10.5" fill="url(#ds-window-depth)" />
-      {/* Shine */}
-      <path d="M44 80 Q46 76 50 76" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
-      <circle cx="43" cy="82" r="1.5" fill="white" opacity="0.6" />
-
-      {/* ════════════ DECORATIVE STAR ════════════ */}
-      <path 
-        d="M50 115 L52 120 L57 120 L53 123 L54 128 L50 125 L46 128 L47 123 L43 120 L48 120 Z" 
-        fill="#f5a623" 
-        stroke="#92400e" 
-        strokeWidth="0.5"
-      />
-
-      {/* ════════════ ENGINE NOZZLE ════════════ */}
-      <path 
-        d="M35 145 Q35 152 50 152 Q65 152 65 145" 
+        d="M36 146 Q35 152 50 152 Q65 152 64 146" 
         fill="none" 
-        stroke="#475569" 
-        strokeWidth="3" 
+        stroke="#334155" 
+        strokeWidth="2" 
         strokeLinecap="round" 
       />
     </svg>
   );
 }
+
 
