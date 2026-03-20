@@ -105,7 +105,7 @@ export function DragonAnimation() {
           }
         `}
         style={{
-          width: 'clamp(50px, 8vw, 80px)',
+          width: 'clamp(75px, 12vw, 120px)',
           bottom: '2%',
           left: '3%',
           transform: 'rotate(75deg)',
@@ -127,7 +127,7 @@ export function DragonAnimation() {
             position: 'absolute',
             left: `${crashPos.left}px`,
             top: `${crashPos.top}px`,
-            width: 'clamp(50px, 8vw, 80px)',
+            width: 'clamp(75px, 12vw, 120px)',
             zIndex: 50,
           }}
         >
@@ -243,12 +243,12 @@ function ShootingStars() {
   )
 }
 
-// ─── SpaceX Realism: Exhaust Trail with Mach Diamonds ───
+/** Multi-layer exhaust trail behind the flying rocket */
 function ExhaustTrail({ isFlying }: { isFlying: boolean }) {
   if (!isFlying) return null;
 
   return (
-    <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-16 h-48 pointer-events-none overflow-hidden z-20">
+    <div className="absolute top-[82%] left-1/2 -translate-x-1/2 w-24 h-60 pointer-events-none overflow-hidden z-20">
       {/* Combustion Core */}
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-full"
@@ -319,13 +319,13 @@ function ExplosionEffect({ isCrashed }: { isCrashed: boolean }) {
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
       {/* Central High-Energy Flash */}
-      <div className="w-24 h-24 bg-white rounded-full animate-explosion-flash blur-lg" />
+      <div className="w-36 h-36 bg-white rounded-full animate-explosion-flash blur-xl" />
       
       {/* Realistic Fire & Heavy Smoke */}
-      {[...Array(24)].map((_, i) => {
-        const angle = (i * 15) * Math.PI / 180;
-        const velocity = 90 + Math.random() * 150;
-        const dist = 120 + Math.random() * 180;
+      {[...Array(30)].map((_, i) => { // Increased particle count
+        const angle = (i * 12) * Math.PI / 180;
+        const velocity = 100 + Math.random() * 200;
+        const dist = 180 + Math.random() * 250; // Increased distance 1.5x
         const isSmoke = i % 3 === 0;
 
         return (
@@ -333,58 +333,58 @@ function ExplosionEffect({ isCrashed }: { isCrashed: boolean }) {
             key={i}
             className={`absolute rounded-full ${isSmoke ? 'bg-slate-800' : 'bg-orange-600'}`}
             style={{
-              width: `${isSmoke ? 30 + Math.random() * 40 : 10 + Math.random() * 15}px`,
-              height: `${isSmoke ? 30 + Math.random() * 40 : 10 + Math.random() * 15}px`,
+              width: `${isSmoke ? 45 + Math.random() * 60 : 15 + Math.random() * 25}px`, // Scaled sizes
+              height: `${isSmoke ? 45 + Math.random() * 60 : 15 + Math.random() * 25}px`,
               left: '50%',
               top: '50%',
-              filter: `blur(${isSmoke ? 10 : 2}px)`,
+              filter: `blur(${isSmoke ? 15 : 3}px)`,
               opacity: 0.85,
               transform: `translate(-50%, -50%)`,
-              animation: `particle-blast-${i} 1.4s cubic-bezier(0.1, 0.5, 0.2, 1) forwards`
+              animation: `particle-blast-${i} 1.6s cubic-bezier(0.1, 0.5, 0.2, 1) forwards`
             }}
           />
         );
       })}
 
       {/* Tumbled Metallic Debris */}
-      {[...Array(12)].map((_, i) => (
+      {[...Array(18)].map((_, i) => ( // Increased debris count
         <div 
           key={`debris-${i}`}
-          className="absolute bg-slate-900 border border-slate-700 w-4 h-1.5"
+          className="absolute bg-slate-900 border border-slate-700 w-6 h-2" // Scaled debris size
           style={{
             left: '50%',
             top: '50%',
             transform: `rotate(${Math.random() * 360}deg)`,
-            animation: `debris-fall-${i} 1.6s ease-out forwards`
+            animation: `debris-fall-${i} 1.8s ease-out forwards`
           }}
         />
       ))}
 
       <style>{`
-        ${[...Array(24)].map((_, i) => {
-          const angle = (i * 15) * Math.PI / 180;
-          const dist = 120 + Math.random() * 200;
+        ${[...Array(30)].map((_, i) => {
+          const angle = (i * 12) * Math.PI / 180;
+          const dist = 180 + Math.random() * 300;
           return `
             @keyframes particle-blast-${i} {
               0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(${2 + Math.random() * 4}); opacity: 0; }
+              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(${3 + Math.random() * 5}); opacity: 0; }
             }
           `;
         }).join('')}
-        ${[...Array(12)].map((_, i) => {
+        ${[...Array(18)].map((_, i) => {
           const angle = Math.random() * Math.PI * 2;
-          const dist = 180 + Math.random() * 120;
+          const dist = 250 + Math.random() * 150;
           return `
             @keyframes debris-fall-${i} {
               0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
-              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) rotate(${720 + Math.random() * 1080}deg); opacity: 0; }
+              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) rotate(${1080 + Math.random() * 1500}deg); opacity: 0; }
             }
           `;
         }).join('')}
         @keyframes explosion-flash {
           0% { transform: scale(0.1); opacity: 1; filter: brightness(4); }
-          15% { transform: scale(2.5); opacity: 0.9; }
-          100% { transform: scale(4.5); opacity: 0; }
+          15% { transform: scale(3.5); opacity: 0.9; }
+          100% { transform: scale(6.5); opacity: 0; }
         }
       `}</style>
     </div>
