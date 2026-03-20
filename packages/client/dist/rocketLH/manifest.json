@@ -1,0 +1,18 @@
+{
+  "name": "RocketLH - Dragon Flight",
+  "short_name": "RocketLH",
+  "description": "Dragon Flight Crash Game - Multi-panel betting with Provably Fair mechanics",
+  "start_url": "/rocketLH/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0b0d1a",
+  "background_color": "#0b0d1a",
+  "icons": [
+    {
+      "src": "/rocketLH/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["games", "entertainment"]
+}

@@ -1,0 +1,74 @@
+:root {
+  /* ─── Color Palette — Deep Space + Golden Flame ─── */
+  --color-bg-primary: #0b0d1a;
+  --color-bg-secondary: #141833;
+  --color-bg-panel: rgba(20, 24, 51, 0.85);
+  --color-bg-panel-active: rgba(30, 35, 70, 0.9);
+  --color-accent-gold: #f5a623;
+  --color-accent-orange: #ff6b35;
+  --color-accent-purple: #7c3aed;
+  --color-accent-green: #22c55e;
+  --color-accent-red: #ef4444;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #94a3b8;
+  --color-text-gold: #fbbf24;
+
+  /* ─── Gradients ─── */
+  --gradient-sky: linear-gradient(180deg, #0f1129 0%, #1a1040 40%, #0b0d1a 100%);
+  --gradient-gold-button: linear-gradient(135deg, #f5a623 0%, #e8930c 50%, #f5a623 100%);
+  --gradient-green-button: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #22c55e 100%);
+  --gradient-red-glow: radial-gradient(circle at center, rgba(239, 68, 68, 0.25) 0%, transparent 70%);
+  --gradient-gold-glow: radial-gradient(circle at center, rgba(245, 166, 35, 0.2) 0%, transparent 70%);
+  --gradient-panel-idle: linear-gradient(135deg, rgba(20, 24, 51, 0.85) 0%, rgba(25, 30, 60, 0.85) 100%);
+  --gradient-panel-bet: linear-gradient(135deg, rgba(245, 166, 35, 0.06) 0%, rgba(20, 24, 51, 0.9) 100%);
+  --gradient-panel-won: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(20, 24, 51, 0.9) 100%);
+  --gradient-panel-lost: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(20, 24, 51, 0.9) 100%);
+
+  /* ─── Glassmorphism ─── */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-hover: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(255, 255, 255, 0.2);
+  --glass-blur: 16px;
+
+  /* ─── Shadows ─── */
+  --shadow-gold: 0 0 20px rgba(245, 166, 35, 0.4);
+  --shadow-gold-lg: 0 0 40px rgba(245, 166, 35, 0.3), 0 0 80px rgba(245, 166, 35, 0.15);
+  --shadow-green: 0 0 20px rgba(34, 197, 94, 0.4);
+  --shadow-red: 0 0 20px rgba(239, 68, 68, 0.4);
+  --shadow-purple: 0 0 30px rgba(124, 58, 237, 0.3);
+  --shadow-panel: 0 4px 24px rgba(0, 0, 0, 0.3);
+
+  /* ─── Border Radius ─── */
+  --radius-panel: 16px;
+  --radius-button: 12px;
+  --radius-input: 8px;
+  --radius-pill: 9999px;
+
+  /* ─── Animation Timing ─── */
+  --anim-multiplier-bounce: 200ms;
+  --anim-crash-explosion: 800ms;
+  --anim-cashout-celebration: 600ms;
+  --anim-panel-transition: 400ms;
+
+  /* ─── Spacing (responsive) ─── */
+  --space-panel-gap: 12px;
+  --space-content-padding: 16px;
+
+  /* ─── Typography ─── */
+  --font-multiplier: clamp(3rem, 10vw, 7rem);
+  --font-countdown: clamp(2.5rem, 8vw, 5rem);
+  --font-crash-label: clamp(1.5rem, 4vw, 2.5rem);
+  --font-payout: clamp(2rem, 6vw, 3rem);
+}
+
+/* ─── Mobile Overrides ─── */
+@media (max-width: 768px) {
+  :root {
+    --space-panel-gap: 8px;
+    --space-content-padding: 12px;
+    --radius-panel: 12px;
+    --radius-button: 10px;
+    --rocket-area-height: clamp(180px, 35vh, 300px);
+  }
+}

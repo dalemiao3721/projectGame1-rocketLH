@@ -1,0 +1,1 @@
+{"version":3,"file":"Settlement.d.ts","sourceRoot":"","sources":["../../../src/db/models/Settlement.ts"],"names":[],"mappings":"AAAA;;GAEG;AAIH,eAAO,MAAM,UAAU;mBACA;QACnB,YAAY,EAAE,MAAM,CAAA;QACpB,KAAK,EAAE,MAAM,CAAA;QACb,OAAO,EAAE,KAAK,GAAG,MAAM,CAAA;QACvB,iBAAiB,EAAE,MAAM,CAAA;QACzB,MAAM,EAAE,MAAM,CAAA;QACd,MAAM,EAAE,MAAM,CAAA;KACf,GAAG,OAAO,CAAC,IAAI,CAAC;CAgBlB,CAAA"}

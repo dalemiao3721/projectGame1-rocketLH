@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=390"/>
+<title>Mobile Bomb (Crashed)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:390px;height:844px;background:#0b0d1a;color:#fff;font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
+.tb{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.12);background:linear-gradient(to right,rgba(11,13,26,0.95),rgba(20,24,51,0.95))}
+.logo{font-size:16px;font-weight:900;letter-spacing:0.1em;color:#f5a623;text-shadow:0 0 20px rgba(245,166,35,0.3)}
+.mute{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center}
+.ct{padding:12px;display:flex;flex-direction:column;gap:8px}
+.az{position:relative;width:100%;height:200px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(180deg,#0f1129 0%,#1a1040 40%,#0b0d1a 100%);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.neb{position:absolute;width:150px;height:150px;top:10%;right:5%;background:radial-gradient(circle,rgba(124,58,237,0.3) 0%,transparent 70%);filter:blur(30px);opacity:0.3}
+.st{position:absolute;border-radius:50%;background:white}
+.bf{position:absolute;bottom:0;left:0;right:0;height:32px;background:linear-gradient(to top,#0b0d1a,transparent)}
+.red-flash{position:absolute;inset:0;background:radial-gradient(circle at center,rgba(239,68,68,0.25) 0%,transparent 70%);z-index:5}
+.mult{position:absolute;top:8%;right:5%;z-index:10;font-size:48px;font-weight:900;color:#ef4444;text-shadow:0 0 40px rgba(239,68,68,0.5);line-height:1}
+.mult-x{font-size:30px;font-weight:700;opacity:0.8}
+.cl{position:absolute;top:5%;right:5%;z-index:10;font-size:11px;text-transform:uppercase;letter-spacing:0.25em;color:#ef4444;font-weight:600}
+.bb{display:flex;align-items:center;gap:10px;padding:2px}
+.bi{flex:1;display:flex;align-items:center;justify-content:space-between}
+.blt{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+.bv{font-size:14px;font-weight:700;color:#fbbf24;text-shadow:0 0 8px rgba(251,191,36,0.3)}
+.rb{flex:1;height:36px;border-radius:10px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:6px;border:none;background:rgba(245,166,35,0.2);color:rgba(0,0,0,0.3)}
+.pg-wrap{position:relative}
+.pg{display:flex;flex-direction:column;gap:8px}
+.pn{border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(135deg,rgba(20,24,51,0.85) 0%,rgba(25,30,60,0.85) 100%);backdrop-filter:blur(16px);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.pn-lost{border-color:rgba(239,68,68,0.25);background:linear-gradient(135deg,rgba(239,68,68,0.06) 0%,rgba(20,24,51,0.9) 100%)}
+.ph{display:flex;align-items:center;justify-content:space-between}
+.pt{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#94a3b8}
+.pt-lost{color:#ef4444}
+.pr{display:flex;align-items:center;gap:4px}
+.plf{flex:1;display:flex;align-items:center;gap:3px}
+.sp{width:1px;height:18px;background:rgba(255,255,255,0.12);flex-shrink:0}
+.pm{width:22px;height:26px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:white;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ai{flex:1;min-width:0;height:26px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:white;text-align:center;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.ab{height:26px;padding:0 8px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;flex-shrink:0;color:rgba(200,180,255,0.8);background:rgba(124,58,237,0.25);border:1px solid rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center}
+.av{flex:1;min-width:0;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(124,58,237,0.4);background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.15)}
+.btn{width:100%;height:36px;border-radius:10px;border:none;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;color:rgba(0,0,0,0.5);background:rgba(245,166,35,0.4)}
+.crash-overlay{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);border-radius:12px}
+.crash-card{background:linear-gradient(135deg,rgba(239,68,68,0.15) 0%,rgba(20,24,51,0.95) 100%);border:1px solid rgba(239,68,68,0.3);border-radius:16px;padding:20px 28px;text-align:center;box-shadow:0 0 60px rgba(239,68,68,0.2),0 4px 24px rgba(0,0,0,0.4)}
+.crash-emoji{font-size:32px;margin-bottom:6px}
+.crash-title{font-size:16px;font-weight:900;color:#ef4444;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:4px}
+.crash-mult{font-size:28px;font-weight:900;color:#ef4444;text-shadow:0 0 30px rgba(239,68,68,0.5);margin-bottom:10px}
+.crash-detail{font-size:11px;color:#94a3b8;margin-bottom:3px}
+.crash-detail b{color:#ef4444;font-weight:700}
+.crash-total{font-size:12px;font-weight:700;color:#ef4444;margin-top:6px}
+.hs{display:flex;align-items:center;gap:6px;padding:6px 2px;overflow-x:auto}
+.hl{font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;white-space:nowrap}
+.pill{padding:3px 8px;border-radius:9999px;font-size:11px;font-weight:700;white-space:nowrap}
+.pg__{background:rgba(34,197,94,0.15);color:#22c55e}
+.pgo{background:rgba(245,166,35,0.15);color:#fbbf24}
+.pr__{background:rgba(239,68,68,0.15);color:#ef4444}
+</style></head><body>
+<div class="tb"><div class="logo">ROCKETLH</div><div class="mute"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div></div>
+<div class="ct">
+<div class="az">
+<div class="neb"></div>
+<div class="st" style="width:2px;height:2px;top:12%;left:15%;opacity:0.5"></div><div class="st" style="width:1px;height:1px;top:25%;left:40%;opacity:0.3"></div><div class="st" style="width:2px;height:2px;top:8%;left:65%;opacity:0.6"></div>
+<div class="red-flash"></div>
+<div class="cl">CRASHED</div>
+<div class="mult">3.72<span class="mult-x">x</span></div>
+<div class="bf"></div>
+</div>
+<div class="bb"><div class="bi"><span class="blt">Available Balance</span><span class="bv">$4,800.00</span></div><div class="rb"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> REBET</div></div>
+<div class="pg-wrap">
+<div class="pg">
+<div class="pn pn-lost"><div class="ph"><span class="pt pt-lost">Panel A — LOST</span></div><div class="pr"><div class="plf"><div class="pm">−</div><div class="ai">100</div><div class="pm">+</div></div><div class="sp"></div><div class="plf"><div class="ab">Auto</div><div class="pm">−</div><div class="av">2.0x</div><div class="pm">+</div></div></div><div class="btn">BET</div></div>
+<div class="pn pn-lost"><div class="ph"><span class="pt pt-lost">Panel B — LOST</span></div><div class="pr"><div class="plf"><div class="pm">−</div><div class="ai">100</div><div class="pm">+</div></div><div class="sp"></div><div class="plf"><div class="ab">Auto</div><div class="pm">−</div><div class="av">3.0x</div><div class="pm">+</div></div></div><div class="btn">BET</div></div>
+<div class="pn"><div class="ph"><span class="pt">Panel C</span></div><div class="pr"><div class="plf"><div class="pm">−</div><div class="ai">100</div><div class="pm">+</div></div><div class="sp"></div><div class="plf"><div class="ab">Auto</div><div class="pm">−</div><div class="av">2.0x</div><div class="pm">+</div></div></div><div class="btn">BET</div></div>
+<div class="pn"><div class="ph"><span class="pt">Panel D</span></div><div class="pr"><div class="plf"><div class="pm">−</div><div class="ai">100</div><div class="pm">+</div></div><div class="sp"></div><div class="plf"><div class="ab">Auto</div><div class="pm">−</div><div class="av">2.0x</div><div class="pm">+</div></div></div><div class="btn">BET</div></div>
+</div>
+<div class="crash-overlay">
+<div class="crash-card">
+<div class="crash-emoji">💥</div>
+<div class="crash-title">Rocket Crash!</div>
+<div class="crash-mult">3.72x</div>
+<div class="crash-detail">Panel A: <b>−$100.00</b></div>
+<div class="crash-detail">Panel B: <b>−$100.00</b></div>
+<div class="crash-total">Total Lost: −$200.00</div>
+</div>
+</div>
+</div>
+<div class="hs"><span class="hl">History</span><span class="pill pg__">1.23x</span><span class="pill pgo">3.45x</span><span class="pill pg__">1.87x</span><span class="pill pgo">5.12x</span><span class="pill pr__">12.34x</span><span class="pill pg__">1.05x</span><span class="pill pgo">2.89x</span></div>
+</div>
+</body></html>
