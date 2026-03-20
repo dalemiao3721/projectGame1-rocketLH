@@ -1,7 +1,7 @@
 /**
- * SVG Rocket sprite — Disney-inspired "High-Fidelity" style.
- * Combines cartoon proportions with realistic rendering: rim lighting, 
- * surface panel textures, complex specular highlights, and refractive glass.
+ * SVG Rocket sprite — SpaceX-inspired "High-Fidelity Realism" style.
+ * Features: High aspect ratio (slender), stainless steel and heat-shield tile textures,
+ * grid fins, interstage details, and realistic Raptor-style nozzles with heat staining.
  */
 export function RocketSprite({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -13,156 +13,107 @@ export function RocketSprite({ className, style }: { className?: string; style?:
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* ── Body: High-Gloss Ceramic/Metallic Blend ── */}
-        <radialGradient id="ds-body-base" cx="45%" cy="35%" r="80%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="40%" stopColor="#f1f5f9" />
-          <stop offset="85%" stopColor="#cbd5e1" />
-          <stop offset="100%" stopColor="#94a3b8" />
-        </radialGradient>
-        
-        {/* ── Rim Light (The "Disney" 3D separator) ── */}
-        <linearGradient id="ds-rim-light" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="white" stopOpacity="0.8" />
-          <stop offset="3%" stopColor="white" stopOpacity="0" />
-          <stop offset="97%" stopColor="white" stopOpacity="0" />
-          <stop offset="100%" stopColor="white" stopOpacity="0.6" />
+        {/* ── Main Body: Matte White Finish (Falcon 9 Style) ── */}
+        <linearGradient id="sx-body-white" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#e2e8f0" />
+          <stop offset="30%" stopColor="#ffffff" />
+          <stop offset="70%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#cbd5e1" />
         </linearGradient>
 
-        {/* ── Specular Shine (Sharp reflection) ── */}
-        <linearGradient id="ds-specular" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="35%" stopColor="white" stopOpacity="0" />
-          <stop offset="38%" stopColor="white" stopOpacity="0.4" />
-          <stop offset="42%" stopColor="white" stopOpacity="0" />
+        {/* ── Interstage & Nozzle: Dark Metallic Carbon/Steel ── */}
+        <linearGradient id="sx-body-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#0f172a" />
+          <stop offset="15%" stopColor="#1e293b" />
+          <stop offset="85%" stopColor="#1e293b" />
+          <stop offset="100%" stopColor="#020617" />
         </linearGradient>
 
-        {/* ── Red Accent: Deep Polish ── */}
-        <radialGradient id="ds-red-rich" cx="35%" cy="25%" r="90%">
-          <stop offset="0%" stopColor="#ff5f5f" />
-          <stop offset="45%" stopColor="#e11d48" />
-          <stop offset="85%" stopColor="#881337" />
-          <stop offset="100%" stopColor="#4c0519" />
+        {/* ── Nozzle Heat Staining (Anodized look) ── */}
+        <radialGradient id="sx-nozzle-heat" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#6366f1" stopOpacity="0.4" />
+          <stop offset="50%" stopColor="#f43f5e" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
         </radialGradient>
 
-        {/* ── Window: Refractive Depth ── */}
-        <radialGradient id="ds-win-glass" cx="35%" cy="30%" r="80%">
-          <stop offset="0%" stopColor="#e0f2fe" />
-          <stop offset="25%" stopColor="#7dd3fc" />
-          <stop offset="60%" stopColor="#0284c7" />
-          <stop offset="90%" stopColor="#0c4a6e" />
-          <stop offset="100%" stopColor="#082f49" />
-        </radialGradient>
+        {/* ── Sharp Sunlight Scrim (Specular) ── */}
+        <linearGradient id="sx-sunlight" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="20%" stopColor="white" stopOpacity="0" />
+          <stop offset="25%" stopColor="white" stopOpacity="0.7" />
+          <stop offset="28%" stopColor="white" stopOpacity="0" />
+        </linearGradient>
 
-        {/* ── Engine Glow (Blue-hot core) ── */}
-        <radialGradient id="ds-magical-core" cx="50%" cy="20%" r="80%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="20%" stopColor="#7dd3fc" />
-          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
-        </radialGradient>
-
-        <filter id="ds-bloom" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
+        <filter id="sx-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
-
-        {/* ── Subtle Panel Texture ── */}
-        <pattern id="ds-panels" x="0" y="0" width="100" height="40" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="39.5" x2="100" y2="39.5" stroke="#94a3b8" strokeWidth="0.5" opacity="0.3" />
-        </pattern>
       </defs>
 
-      {/* ════════════ ENGINE BLOOM ════════════ */}
-      <circle cx="50" cy="158" r="28" fill="url(#ds-magical-core)" opacity="0.5" filter="url(#ds-bloom)">
-        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="1s" repeatCount="indefinite" />
-      </circle>
-
-      {/* ════════════ MAGICAL ENGINE STREAM ════════════ */}
-      <g filter="url(#ds-bloom)">
-        {/* Outer Plasma */}
-        <path d="M35 145 Q50 185 65 145" fill="none" stroke="#38bdf8" strokeWidth="12" strokeOpacity="0.2" strokeLinecap="round">
-          <animate attributeName="d" values="M35 145 Q50 185 65 145; M30 145 Q50 195 70 145; M35 145 Q50 185 65 145" dur="0.5s" repeatCount="indefinite" />
+      {/* ════════════ ENGINE PLUME CORE ════════════ */}
+      <g filter="url(#sx-glow)">
+        <path d="M40 160 Q50 190 60 160" fill="none" stroke="#f97316" strokeWidth="14" strokeOpacity="0.4">
+          <animate attributeName="d" values="M40 160 Q50 190 60 160; M35 160 Q50 205 65 160; M40 160 Q50 190 60 160" dur="0.2s" repeatCount="indefinite" />
         </path>
-        {/* Inner Core */}
-        <path d="M42 145 Q50 170 58 145" fill="none" stroke="white" strokeWidth="8" strokeLinecap="round">
-          <animate attributeName="d" values="M42 145 Q50 170 58 145; M40 145 Q50 185 60 145; M42 145 Q50 170 58 145" dur="0.25s" repeatCount="indefinite" />
+        <path d="M45 160 Q50 180 55 160" fill="none" stroke="white" strokeWidth="6" strokeLinecap="round">
+          <animate attributeName="d" values="M45 160 Q50 180 55 160; M42 160 Q50 195 58 160; M45 160 Q50 180 55 160" dur="0.1s" repeatCount="indefinite" />
         </path>
       </g>
 
-      {/* ════════════ FINS — Rounded but Solid ════════════ */}
-      {/* Left Fin */}
-      <path d="M30 110 Q8 115 15 148 Q30 142 32 115 Z" fill="url(#ds-red-rich)" stroke="#4c0519" strokeWidth="0.5" />
-      <path d="M18 118 Q12 118 16 135" fill="none" stroke="white" strokeWidth="1.5" opacity="0.2" strokeLinecap="round" />
-      {/* Right Fin */}
-      <path d="M70 110 Q92 115 85 148 Q70 142 68 115 Z" fill="url(#ds-red-rich)" stroke="#4c0519" strokeWidth="0.5" />
-      <path d="M82 118 Q88 118 84 135" fill="none" stroke="white" strokeWidth="1.5" opacity="0.2" strokeLinecap="round" />
-
-      {/* ════════════ MAIN BODY — High-quality Porcelain ════════════ */}
-      {/* Base Shape */}
-      <path 
-        d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" 
-        fill="url(#ds-body-base)" 
-      />
-      {/* Subtle Panel Grooves */}
-      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-panels)" opacity="0.4" />
+      {/* ════════════ MAIN BODY (F9 STYLE) ════════════ */}
+      {/* Interstage (Black portion) */}
+      <rect x="38" y="25" width="24" height="15" fill="url(#sx-body-dark)" rx="1" />
       
-      {/* Light/Shadow Overlays */}
-      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-specular)" />
-      <path d="M30 145 L30 60 Q30 15 50 5 Q70 15 70 60 L70 145 Q50 155 30 145 Z" fill="url(#ds-rim-light)" />
-
-      {/* ════════════ NOSE CONE — Polished Finish ════════════ */}
-      <path 
-        d="M30 60 Q30 15 50 5 Q70 15 70 60 Q50 72 30 60 Z" 
-        fill="url(#ds-red-rich)" 
-        stroke="#4c0519" 
-        strokeWidth="0.5"
-      />
-      {/* Rim light on nose */}
-      <path d="M32 58 Q32 18 50 8" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-      {/* Specular highlight */}
-      <ellipse cx="44" cy="24" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-15, 44, 24)" />
-
-      {/* ════════════ PREMIUM WINDOW ════════════ */}
-      {/* Metallic Bezel */}
-      <circle cx="50" cy="85" r="15" fill="#1e293b" />
-      <circle cx="50" cy="85" r="14.5" fill="#f1f5f9" />
-      <circle cx="50" cy="85" r="13.5" fill="#334155" />
-      {/* Glass with internal reflections */}
-      <circle cx="50" cy="85" r="12" fill="url(#ds-win-glass)" />
-      {/* Surface reflection */}
-      <path d="M42 82 Q45 76 52 76" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
-      <circle cx="43" cy="80" r="1.5" fill="white" opacity="0.5" />
-      {/* Rim light inside glass */}
-      <circle cx="50" cy="85" r="11" fill="none" stroke="white" strokeWidth="0.5" opacity="0.1" />
-
-      {/* ════════════ MECHANICAL DETAILS ════════════ */}
-      {/* Rivets / Fasteners */}
-      <circle cx="35" cy="100" r="1" fill="#475569" opacity="0.4" />
-      <circle cx="65" cy="100" r="1" fill="#475569" opacity="0.4" />
-      <circle cx="35" cy="130" r="1" fill="#475569" opacity="0.4" />
-      <circle cx="65" cy="130" r="1" fill="#475569" opacity="0.4" />
+      {/* Booster Tube */}
+      <rect x="38" y="40" width="24" height="110" fill="url(#sx-body-white)" />
       
-      {/* Golden Logo Plaque */}
-      <g transform="translate(42, 115) scale(0.6)">
-        <circle cx="13" cy="13" r="14" fill="#f5a623" stroke="#92400e" strokeWidth="1" />
-        <path d="M13 5 L15 11 L21 11 L16 15 L18 21 L13 17 L8 21 L10 15 L5 11 L11 11 Z" fill="white" opacity="0.9" />
+      {/* Shadowing & Specular */}
+      <rect x="38" y="40" width="24" height="110" fill="url(#sx-sunlight)" />
+
+      {/* ════════════ NOSE CONE (FAIRING) ════════════ */}
+      <path d="M38 40 L38 25 Q38 2 50 2 Q62 2 62 25 L62 40 Z" fill="url(#sx-body-white)" />
+      <path d="M38 40 L38 25 Q38 2 50 2" fill="none" stroke="white" strokeWidth="0.8" opacity="0.4" />
+      
+      {/* ════════════ GRID FINS (UPPER) ════════════ */}
+      <g transform="translate(36, 30)">
+        <rect width="6" height="8" fill="#1e293b" rx="0.5" transform="skewY(-10)" />
+        <line x1="1" y1="1" x2="5" y2="7" stroke="#475569" strokeWidth="0.5" opacity="0.5" />
+        <line x1="5" y1="1" x2="1" y2="7" stroke="#475569" strokeWidth="0.5" opacity="0.5" />
+      </g>
+      <g transform="translate(58, 30)">
+        <rect width="6" height="8" fill="#1e293b" rx="0.5" transform="skewY(10)" />
+        <line x1="1" y1="1" x2="5" y2="7" stroke="#475569" strokeWidth="0.5" opacity="0.5" />
+        <line x1="5" y1="1" x2="1" y2="7" stroke="#475569" strokeWidth="0.5" opacity="0.5" />
       </g>
 
-      {/* ════════════ ENGINE NOZZLE — Heat-stained Metal ════════════ */}
-      <path 
-        d="M34 145 Q35 156 50 156 Q65 156 66 145" 
-        fill="none" 
-        stroke="#1e293b" 
-        strokeWidth="5" 
-        strokeLinecap="round" 
-      />
-      <path 
-        d="M36 146 Q35 152 50 152 Q65 152 64 146" 
-        fill="none" 
-        stroke="#334155" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-      />
+      {/* ════════════ LANDING LEGS (FOLDED) ════════════ */}
+      <path d="M38 120 L35 150 L38 150 Z" fill="#0f172a" />
+      <path d="M62 120 L65 150 L62 150 Z" fill="#0f172a" />
+
+      {/* ════════════ INDUSTRIAL DETAILS ════════════ */}
+      {/* External Pipe (LOX Line) */}
+      <rect x="49" y="40" width="1.5" height="110" fill="#94a3b8" opacity="0.6" />
+      
+      {/* USA Decal (Abstract) */}
+      <rect x="43" y="65" width="4" height="2.5" fill="#1e40af" rx="0.2" />
+      <rect x="43" y="68.5" width="14" height="1" fill="#1e293b" rx="0.2" />
+      
+      {/* Panel Rivets/Sensors */}
+      <circle cx="41" cy="50" r="0.4" fill="#000" opacity="0.3" />
+      <circle cx="41" cy="60" r="0.4" fill="#000" opacity="0.3" />
+      <circle cx="41" cy="70" r="0.4" fill="#000" opacity="0.3" />
+      
+      {/* Cold Gas Thruster Ports */}
+      <rect x="47" y="32" width="1" height="0.5" fill="white" opacity="0.8" />
+      <rect x="52" y="32" width="1" height="0.5" fill="white" opacity="0.8" />
+
+      {/* ════════════ ENGINE SECTION ════════════ */}
+      <rect x="40" y="150" width="20" height="8" fill="url(#sx-body-dark)" />
+      {/* Nozzles */}
+      <path d="M42 158 L40 166 L46 166 L44 158 Z" fill="#334155" />
+      <path d="M50 158 L48 166 L52 166 L50 158 Z" fill="#334155" />
+      <path d="M58 158 L56 166 L60 166 L58 158 Z" fill="#334155" />
+      {/* Heat staining overlay */}
+      <rect x="40" y="158" width="20" height="8" fill="url(#sx-nozzle-heat)" />
     </svg>
   );
 }

@@ -41,25 +41,19 @@ input[type="number"] { -moz-appearance: textfield; }
 
 /* ─── Dragon Flight — diagonal ascent path ─── */
 /* Desktop: 8° ascent (tan8≈0.14) */
-/* ─── Dragon Flight — diagonal ascent with Squash & Stretch ─── */
+/* ─── Dragon Flight — Powerful Rocket Ascent ─── */
 @keyframes dragon-fly {
   0% {
-    transform: translate(0, 0) rotate(75deg) scale(1, 1);
+    transform: translate(0, 0) rotate(75deg);
   }
-  15% {
-    transform: translate(8vw, -1vw) rotate(75deg) scale(1.15, 0.85); /* Stretch forward */
-  }
-  30% {
-    transform: translate(16vw, -2.2vw) rotate(75deg) scale(0.95, 1.05); /* Squash back */
+  20% {
+    transform: translate(8vw, -1.1vw) rotate(75deg);
   }
   50% {
-    transform: translate(26vw, -3.6vw) rotate(75deg) scale(1.08, 0.94);
-  }
-  75% {
-    transform: translate(38vw, -5.3vw) rotate(75deg) scale(0.98, 1.02);
+    transform: translate(22vw, -3.1vw) rotate(75deg);
   }
   100% {
-    transform: translate(45vw, -6.3vw) rotate(75deg) scale(1, 1);
+    transform: translate(45vw, -6.3vw) rotate(75deg);
   }
 }
 
@@ -91,19 +85,13 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 /* ─── Dragon Idle Hover — gentle float ─── */
-/* ─── Dragon Idle Hover — gentle float with subtle pulse ─── */
+/* ─── Dragon Idle Hover — subtle vibration ─── */
 @keyframes dragon-idle {
   0%, 100% {
-    transform: translateY(0) rotate(-5deg) scale(1);
-  }
-  25% {
-    transform: translateY(-8px) rotate(-3deg) scale(1.02, 0.98);
+    transform: translateY(0) rotate(-5deg);
   }
   50% {
-    transform: translateY(-12px) rotate(-7deg) scale(0.98, 1.02);
-  }
-  75% {
-    transform: translateY(-5px) rotate(-4deg) scale(1.01, 0.99);
+    transform: translateY(-2px) rotate(-5.2deg);
   }
 }
 

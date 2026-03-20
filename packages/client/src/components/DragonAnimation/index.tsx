@@ -136,10 +136,10 @@ export function DragonAnimation() {
       )}
 
       {/* Rocket exhaust trail during flight */}
-      {isFlying && <ExhaustTrail />}
+      <ExhaustTrail isFlying={isFlying} />
 
       {/* Crash explosion effect */}
-      {isCrashed && <ExplosionEffect />}
+      <ExplosionEffect isCrashed={isCrashed} />
 
       {/* Overlays: countdown (center) or multiplier (top-right) */}
       <CountdownTimer />
@@ -243,119 +243,150 @@ function ShootingStars() {
   )
 }
 
-/** Multi-layer exhaust trail behind the flying rocket */
-function ExhaustTrail() {
+// ─── SpaceX Realism: Exhaust Trail with Mach Diamonds ───
+function ExhaustTrail({ isFlying }: { isFlying: boolean }) {
+  if (!isFlying) return null;
+
   return (
-    <div className="absolute bottom-[8%] left-[12%] pointer-events-none will-change-transform">
-      {/* Soft magical glow */}
-      <div
-        className="absolute -top-6 -left-4 w-32 h-14 rounded-full animate-pulse opacity-40"
+    <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-16 h-48 pointer-events-none overflow-hidden z-20">
+      {/* Combustion Core */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-full"
         style={{
-          background: 'radial-gradient(ellipse at left, rgba(56,189,248,0.5), rgba(124,58,237,0.2) 60%, transparent 90%)',
-          filter: 'blur(12px)',
-        }}
-      />
-      {/* Core magical stream */}
-      <div
-        className="absolute w-36 h-4 rounded-full animate-pulse"
-        style={{
-          background: 'linear-gradient(to right, rgba(255,255,255,1), rgba(56,189,248,0.8), rgba(124,58,237,0.4), transparent)',
+          background: 'linear-gradient(to bottom, #fff, #fbbf24 15%, #f97316 40%, #ea580c 70%, transparent)',
           filter: 'blur(3px)',
-          boxShadow: '0 0 25px rgba(56,189,248,0.6)',
+          opacity: 0.9
         }}
       />
-      {/* Magical sparkle particles */}
-      {[...Array(10)].map((_, i) => (
-        <div
+      
+      {/* Mach Diamonds (Shock diamonds) */}
+      {[0, 1, 2, 3].map((i) => (
+        <div 
           key={i}
-          className="absolute animate-pulse"
-          style={{
-            width: `${3 + Math.random() * 5}px`,
-            height: `${3 + Math.random() * 5}px`,
-            top: `${-10 + Math.random() * 20}px`,
-            left: `${Math.random() * 100}px`,
-            background: 'white',
-            borderRadius: '1px',
-            transform: `rotate(${Math.random() * 360}deg)`,
-            opacity: 0.6 + Math.random() * 0.4,
-            animationDelay: `${Math.random() * 0.8}s`,
-            animationDuration: `${0.3 + Math.random() * 0.4}s`,
-            boxShadow: `0 0 8px ${i % 2 === 0 ? 'rgba(56,189,248,0.8)' : 'rgba(124,58,237,0.8)'}`,
+          className="absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-sky-200/40 rotate-45"
+          style={{ 
+            top: `${10 + i * 22}%`,
+            animation: `mach-pulse 0.15s infinite ${i * 0.04}s alternate`,
+            boxShadow: '0 0 8px rgba(255,255,255,0.4)'
           }}
         />
       ))}
-    </div>
-  )
-}
 
-/** Crash explosion with soft magical fire particles and radial burst */
-function ExplosionEffect() {
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 18 }, (_, i) => {
-        const angle = (i / 18) * Math.PI * 2
-        const distance = 50 + Math.random() * 110
-        return {
-          px: Math.cos(angle) * distance,
-          py: Math.sin(angle) * distance,
-          size: 6 + Math.random() * 12,
-          duration: 0.6 + Math.random() * 0.6,
-          delay: Math.random() * 0.2,
-          color: i % 4 === 0 ? '#ff4d4d' : i % 4 === 1 ? '#38bdf8' : i % 4 === 2 ? '#fbbf24' : '#ffffff',
-        }
-      }),
-    [],
-  )
-
-  return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-      {/* Soft radial burst */}
-      <div
-        className="absolute rounded-full animate-[explosion-expand_1s_ease-out_forwards]"
-        style={{
-          width: '140px',
-          height: '140px',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(56,189,248,0.4) 40%, transparent 80%)',
-        }}
-      />
-      {/* Colorful magical ring */}
-      <div
-        className="absolute rounded-full animate-[explosion-expand_1.2s_ease-out_0.1s_forwards]"
-        style={{
-          width: '100px',
-          height: '100px',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%)',
-          border: '2px solid rgba(255,255,255,0.2)',
-        }}
-      />
-      {/* Magical fire sparks */}
-      {particles.map((p, i) => (
+      {/* Physics-based Smoke/Vapor */}
+      {[...Array(10)].map((_, i) => (
         <div
           key={i}
-          className="absolute rounded-full animate-[fire-particle_ease-out_forwards]"
+          className="absolute bg-slate-400/10 rounded-full"
           style={{
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-            background: p.color,
-            boxShadow: `0 0 ${p.size * 1.5}px ${p.color}`,
-            filter: 'blur(1px)',
-            animationDuration: `${p.duration}s`,
-            animationDelay: `${p.delay}s`,
-            '--px': `${p.px}px`,
-            '--py': `${p.py}px`,
-          } as React.CSSProperties}
+            left: `${45 + Math.random() * 10}%`,
+            top: `${20 + Math.random() * 60}%`,
+            width: `${6 + Math.random() * 10}px`,
+            height: `${6 + Math.random() * 10}px`,
+            animation: `smoke-float ${0.6 + Math.random() * 0.4}s infinite`,
+            filter: 'blur(3px)'
+          }}
         />
       ))}
-      {/* Central bright flash */}
-      <div
-        className="absolute rounded-full animate-[fade-in_200ms_ease-out]"
-        style={{
-          width: '80px',
-          height: '80px',
-          background: 'radial-gradient(circle, #fff 0%, rgba(56,189,248,0.6) 50%, transparent 80%)',
-          filter: 'blur(6px)',
-        }}
-      />
+
+      <style>{`
+        @keyframes mach-pulse {
+          from { transform: translate(-50%, 0) scale(0.7); opacity: 0.3; }
+          to { transform: translate(-50%, 0) scale(1.1); opacity: 0.7; }
+        }
+        @keyframes smoke-float {
+          0% { transform: translateY(0) scale(1); opacity: 0.3; }
+          100% { transform: translateY(50px) scale(3); opacity: 0; }
+        }
+      `}</style>
     </div>
-  )
+  );
+}
+
+// ─── SpaceX Realism: Physical Explosion with Debris ───
+function ExplosionEffect({ isCrashed }: { isCrashed: boolean }) {
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    if (isCrashed) {
+      setShow(true);
+      const timer = setTimeout(() => setShow(false), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [isCrashed]);
+
+  if (!show) return null;
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
+      {/* Central High-Energy Flash */}
+      <div className="w-24 h-24 bg-white rounded-full animate-explosion-flash blur-lg" />
+      
+      {/* Realistic Fire & Heavy Smoke */}
+      {[...Array(24)].map((_, i) => {
+        const angle = (i * 15) * Math.PI / 180;
+        const velocity = 90 + Math.random() * 150;
+        const dist = 120 + Math.random() * 180;
+        const isSmoke = i % 3 === 0;
+
+        return (
+          <div
+            key={i}
+            className={`absolute rounded-full ${isSmoke ? 'bg-slate-800' : 'bg-orange-600'}`}
+            style={{
+              width: `${isSmoke ? 30 + Math.random() * 40 : 10 + Math.random() * 15}px`,
+              height: `${isSmoke ? 30 + Math.random() * 40 : 10 + Math.random() * 15}px`,
+              left: '50%',
+              top: '50%',
+              filter: `blur(${isSmoke ? 10 : 2}px)`,
+              opacity: 0.85,
+              transform: `translate(-50%, -50%)`,
+              animation: `particle-blast-${i} 1.4s cubic-bezier(0.1, 0.5, 0.2, 1) forwards`
+            }}
+          />
+        );
+      })}
+
+      {/* Tumbled Metallic Debris */}
+      {[...Array(12)].map((_, i) => (
+        <div 
+          key={`debris-${i}`}
+          className="absolute bg-slate-900 border border-slate-700 w-4 h-1.5"
+          style={{
+            left: '50%',
+            top: '50%',
+            transform: `rotate(${Math.random() * 360}deg)`,
+            animation: `debris-fall-${i} 1.6s ease-out forwards`
+          }}
+        />
+      ))}
+
+      <style>{`
+        ${[...Array(24)].map((_, i) => {
+          const angle = (i * 15) * Math.PI / 180;
+          const dist = 120 + Math.random() * 200;
+          return `
+            @keyframes particle-blast-${i} {
+              0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(${2 + Math.random() * 4}); opacity: 0; }
+            }
+          `;
+        }).join('')}
+        ${[...Array(12)].map((_, i) => {
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 180 + Math.random() * 120;
+          return `
+            @keyframes debris-fall-${i} {
+              0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+              100% { transform: translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) rotate(${720 + Math.random() * 1080}deg); opacity: 0; }
+            }
+          `;
+        }).join('')}
+        @keyframes explosion-flash {
+          0% { transform: scale(0.1); opacity: 1; filter: brightness(4); }
+          15% { transform: scale(2.5); opacity: 0.9; }
+          100% { transform: scale(4.5); opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
 }

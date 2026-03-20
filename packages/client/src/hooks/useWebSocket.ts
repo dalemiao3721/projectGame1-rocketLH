@@ -13,7 +13,7 @@ export function useWebSocket() {
   useEffect(() => {
     wsClient.connect()
 
-    const unsubscribe = wsClient.onMessage((msg: ServerMessage) => {
+    const unsubscribe = wsClient.onMessage((msg: any) => {
       switch (msg.event) {
         case 'round_waiting':
           dispatch({ type: 'RESET_PANELS' })

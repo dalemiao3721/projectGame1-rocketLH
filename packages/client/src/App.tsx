@@ -103,7 +103,7 @@ function BalanceBar() {
         wsClient.send({
           action: 'place_bet',
           data: {
-            panelId,
+            panelId: panelId as PanelId,
             betAmount: lastBets[panelId],
             ...(isLobbyMode && lobbyToken && lobbySessionId
               ? { lobbyToken, lobbySessionId }

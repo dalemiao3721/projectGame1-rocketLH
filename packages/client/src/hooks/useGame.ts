@@ -40,7 +40,7 @@ export function useGame() {
       // Always notify server — covers both pre-bet and post-bet scenarios
       wsClient.send({
         action: 'update_auto_cashout' as any,
-        data: { panelId, autoCashout: multiplier },
+        data: { panelId, autoCashout: multiplier ?? undefined } as any,
       })
     },
     [dispatch],
@@ -59,7 +59,7 @@ export function useGame() {
 
       console.log('[BET] Sending WS message...')
       wsClient.send({
-        action: 'place_bet',
+        action: 'place_bet' as any,
         data: {
           panelId,
           betAmount: panel.betAmount,
@@ -67,7 +67,7 @@ export function useGame() {
           ...(isLobbyMode && lobbyToken && lobbySessionId
             ? { lobbyToken, lobbySessionId }
             : {}),
-        },
+        } as any,
       })
     },
     [state.roundPhase, state.panels, state.balance, isLobbyMode, lobbyToken, lobbySessionId],
